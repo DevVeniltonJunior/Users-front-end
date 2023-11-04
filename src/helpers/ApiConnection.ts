@@ -1,19 +1,19 @@
-type User = {
+export type TUser = {
   id: number
   name: string
   email: string
   phone: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
-type UserDTO = {
+export type UserDTO = {
   name: string
   email: string
   phone: string
 }
 
-type Filter = {
+export type Filter = {
   id?: string
   name?: string
   createdAt?: string
@@ -43,7 +43,7 @@ class ApiConnection {
     return apiURL
   }
 
-  static get(filter?: Filter): Promise<User[]> {
+  static get(filter?: Filter): Promise<TUser[]> {
     const url = this.getUrl(filter)
 
     const users = fetch(url, {
@@ -91,11 +91,11 @@ class ApiConnection {
       });
   }
 
-  static update(_id: string, data: Partial<UserDTO>) {
+  static update(_id: number, data: Partial<UserDTO>) {
     const url = this.getUrl()
 
     const body = {
-      id: parseInt(_id),
+      id: _id,
       name: data?.name,
       email: data?.email,
       phone: data?.phone
@@ -118,8 +118,8 @@ class ApiConnection {
       });
   }
 
-  static delete(_id: string) {
-    const url = this.getUrl({ id: _id })
+  static delete(_id: number) {
+    const url = this.getUrl({ id: _id.toString() })
 
     fetch(url, {
       method: 'DELETE',
