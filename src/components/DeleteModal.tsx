@@ -19,9 +19,9 @@ const DeleteModal = ({ isOpen, setOpen, id }: TModal) => {
   return (
     <div className={style.background}>
       <div className={style.modal}>
-        <form action="#" onSubmit={() => submit()}>
+        <form onSubmit={() => submit()}>
           <p>Are you sure you want to delete this user?</p>
-          <button type="submit">Update</button>
+          <button type="submit">Delete</button>
         </form>
         <button onClick={() => setOpen(!isOpen)}>Close</button>
       </div>

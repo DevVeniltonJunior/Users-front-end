@@ -13,11 +13,12 @@ const UpdateModal = ({ isOpen, setOpen, id }: TModal) => {
   if(!isOpen) return <></>
 
   const submit = () => {
-    const name = document.getElementById('name') as HTMLInputElement
-    const email = document.getElementById('email') as HTMLInputElement
-    const phone = document.getElementById('phone') as HTMLInputElement
+    const name = document.getElementById('updateName') as HTMLInputElement
+    console.log(name.value)
+    const email = document.getElementById('updateEmail') as HTMLInputElement
+    const phone = document.getElementById('updatePhone') as HTMLInputElement
 
-    console.log(name.value, email.value, phone.value)
+    console.log('test', name.value, email.value, phone.value)
 
     ApiConnection.update(id, {
       name: name.value,
@@ -29,10 +30,10 @@ const UpdateModal = ({ isOpen, setOpen, id }: TModal) => {
   return (
     <div className={style.background}>
       <div className={style.modal}>
-        <form action="#" onSubmit={() => submit()}>
-          <input id='name' type="text" placeholder="Insert your Name"/>
-          <input id='email' type="email" placeholder="Insert your Email" pattern="^[a-zA-Z0-9._%+-]+@+[a-zA-Z]+\.[a-zA-Z]$"/>
-          <input id='phone' type="tel" placeholder="Insert your Phone" pattern="^[0-9]{2}([0-9]{8}|[0-9]{9})"/>
+        <form onSubmit={() => submit()}>
+          <input id='updateName' type="text" placeholder="Update your Name"/>
+          <input id='updateEmail' type="email" placeholder="Update your Email" pattern="^[a-zA-Z0-9._%+-]+@+[a-zA-Z]+\.[a-zA-Z]$"/>
+          <input id='updatePhone' type="tel" placeholder="Update your Phone" pattern="^[0-9]{2}([0-9]{8}|[0-9]{9})"/>
 
           <button type="submit">Update</button>
         </form>

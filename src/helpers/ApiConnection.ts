@@ -14,9 +14,8 @@ export type UserDTO = {
 }
 
 export type Filter = {
-  id?: string
+  id: string
   name?: string
-  createdAt?: string
   gte?: string
   lte?: string
 }
@@ -24,33 +23,29 @@ export type Filter = {
 class ApiConnection {
 
   private static getUrl(options?: Filter): string {
-    const apiURL = 'https://http://localhost:3000/users'
+    const apiURL = 'http://localhost:3000/users'
 
     if(options) {
       let name = ''
-      let createdAt = ''
       let gte = ''
       let lte = ''
 
       if(options.name) name = options.name
-      if(options.createdAt) createdAt = options.createdAt
       if(options.gte) gte = options.gte
       if(options.lte) lte = options.lte
 
-      apiURL.concat(`?name=${name}&createdAt=${createdAt}&gte=${gte}&lte=${lte}`)
+      apiURL.concat(`?name=${name}&gte=${gte}&lte=${lte}`)
     }
 
     return apiURL
   }
 
   static get(filter?: Filter): Promise<TUser[]> {
-    const url = this.getUrl(filter)
+    console.log(this.getUrl(filter))
+    const url = 'http://localhost:3000/users'
 
     const users = fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      method: 'GET'
     })
       .then(response => response.json())
       .then(data => {
@@ -65,7 +60,7 @@ class ApiConnection {
   }
 
   static create(data: UserDTO) {
-    const url = this.getUrl()
+    const url = 'http://localhost:3000/users'
 
     const body = {
       id: 1,
@@ -92,7 +87,7 @@ class ApiConnection {
   }
 
   static update(_id: number, data: Partial<UserDTO>) {
-    const url = this.getUrl()
+    const url = 'http://localhost:3000/users'
 
     const body = {
       id: _id,
@@ -100,6 +95,8 @@ class ApiConnection {
       email: data?.email,
       phone: data?.phone
     }
+
+    console.log(body)
 
     fetch(url, {
       method: 'PUT',
@@ -119,7 +116,10 @@ class ApiConnection {
   }
 
   static delete(_id: number) {
-    const url = this.getUrl({ id: _id.toString() })
+    const apiURL = 'http://localhost:3000/users'
+    const url = `${apiURL}?id=${_id}`
+
+    console.log(url)
 
     fetch(url, {
       method: 'DELETE',

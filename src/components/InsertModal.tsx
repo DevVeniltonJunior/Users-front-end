@@ -28,7 +28,7 @@ const InsertModal = ({ isOpen, setOpen }: TModal) => {
   return (
     <div className={style.background}>
       <div className={style.modal}>
-        <form action="#" onSubmit={() => submit()}>
+        <form onSubmit={() => submit()}>
           <input id='name' type="text" placeholder="Insert your Name" required/>
           <input id='email' type="email" placeholder="Insert your Email" pattern="^[a-zA-Z0-9._%+-]+@+[a-zA-Z]+\.[a-zA-Z]$" required/>
           <input id='phone' type="tel" placeholder="Insert your Phone" pattern="^[0-9]{2}([0-9]{8}|[0-9]{9})" required/>

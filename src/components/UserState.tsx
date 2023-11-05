@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import ApiConnection, { TUser } from '../helpers/ApiConnection'
-import UpdateModal from './updateModal'
+import UpdateModal from './UpdateModal'
 import DeleteModal from './DeleteModal'
 
 const UserState = () => {
   const [rows, setRows] = useState<TUser[]>([])
-  const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const [updateOpen, setUpdateOpen] = useState<boolean>(true)
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(true)
+  const [openId, setOpenId] = useState<number>(0)
+
+  const [updateOpen, setUpdateOpen] = useState<boolean>(false)
+  const [deleteOpen, setDeleteOpen] = useState<boolean>(false)
 
   useEffect(() => {
     setIsLoading(true)
@@ -23,7 +24,6 @@ const UserState = () => {
 
       if(users instanceof Error) alert(users.message)
       setRows(users)
-      setTotalCount(users.length)
     })
   }
 
@@ -47,14 +47,14 @@ const UserState = () => {
               <td>{row.email}</td>
               <td>{row.phone}</td>
               <td>{row.createdAt}</td>
-              <td><button>Edit</button></td>
-              <td><button>delete</button></td>
-              <UpdateModal isOpen={updateOpen} setOpen={setUpdateOpen} id={row.id}/>
-              <DeleteModal isOpen={deleteOpen} setOpen={setDeleteOpen} id={row.id}/>
+              <td><button onClick={() => { setUpdateOpen(!updateOpen), setOpenId(row.id) }}>Update</button></td>
+              <td><button onClick={() => { setDeleteOpen(!deleteOpen), setOpenId(row.id) }}>Delete</button></td>
             </tr>
           ))}
         </tbody>
       </table>
+      <UpdateModal isOpen={updateOpen} setOpen={setUpdateOpen} id={openId}/>
+      <DeleteModal isOpen={deleteOpen} setOpen={setDeleteOpen} id={openId}/>
     </>
   )
 }
