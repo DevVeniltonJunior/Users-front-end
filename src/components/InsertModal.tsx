@@ -1,5 +1,5 @@
 import ApiConnection from '../helpers/ApiConnection'
-import style from './InsertModal.module.css'
+import style from './Modal.module.css'
 //import { useState } from 'react'
 
 type TModal = {
@@ -28,14 +28,16 @@ const InsertModal = ({ isOpen, setOpen }: TModal) => {
   return (
     <div className={style.background}>
       <div className={style.modal}>
+        <h2>Insert User</h2>
+
         <form onSubmit={() => submit()}>
           <input id='name' type="text" placeholder="Insert your Name" required/>
           <input id='email' type="email" placeholder="Insert your Email" pattern="^[a-zA-Z0-9._%+-]+@+[a-zA-Z]+\.[a-zA-Z]$" required/>
           <input id='phone' type="tel" placeholder="Insert your Phone" pattern="^[0-9]{2}([0-9]{8}|[0-9]{9})" required/>
 
-          <button type="submit">Submit</button>
+          <button id='submit' type="submit">Submit</button>
         </form>
-        <button onClick={() => setOpen(!isOpen)}>Close</button>
+        <button id='cancel' onClick={() => setOpen(!isOpen)}>Close</button>
       </div>
     </div>
   )

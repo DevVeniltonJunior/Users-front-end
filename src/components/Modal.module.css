@@ -12,8 +12,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  color: black;
+  background-color: gray;
+  color: white;
   padding: 20px;
+  border: 1px solid white;
   border-radius: 5px;
+}
+
+.modal input {
+  margin: 10px;
 }

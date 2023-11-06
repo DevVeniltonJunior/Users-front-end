@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <h1>Users</h1>
+      <button id='action' onClick={() => { setOpen(!open) }}>Insert</button>
       <UserState/>
-      <button onClick={() => { setOpen(!open) }}>Insert</button>
       <InsertModal isOpen={open} setOpen={setOpen}/>
     </>
   )
